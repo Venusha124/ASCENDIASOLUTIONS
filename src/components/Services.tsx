@@ -39,9 +39,13 @@ const services = [
     },
 ];
 
-export default function Services() {
+interface ServicesProps {
+    hideHeader?: boolean;
+}
+
+export default function Services({ hideHeader = false }: ServicesProps) {
     return (
-        <section className="py-32 relative bg-[#050505] overflow-hidden">
+        <section id="services" className="relative h-screen flex items-center bg-[#050505] overflow-hidden">
             {/* Background Tech Image Overlay */}
             <div className="absolute inset-0 z-0">
                 <img
@@ -52,18 +56,20 @@ export default function Services() {
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-24"
-                >
-                    <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Expertise</h2>
-                    <h3 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-2xl">
-                        Uncompromising <span className="text-white/20">Digital Architecture.</span>
-                    </h3>
-                </motion.div>
+                {!hideHeader && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-24"
+                    >
+                        <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Expertise</h2>
+                        <h3 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-2xl">
+                            Uncompromising <span className="text-white/20">Digital Architecture.</span>
+                        </h3>
+                    </motion.div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {services.map((service, index) => (

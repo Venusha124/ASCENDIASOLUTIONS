@@ -47,7 +47,7 @@ export default function Hero() {
     return (
         <section
             onMouseMove={handleMouseMove}
-            className="relative min-h-screen flex items-center pt-20 overflow-hidden"
+            className="relative h-screen flex items-center overflow-visible"
         >
             {/* Background Image with Parallax & Overlay */}
             <div className="absolute inset-0 z-0">
@@ -68,49 +68,63 @@ export default function Hero() {
             {/* Background Decorative Elements with Parallax */}
             <motion.div
                 style={{ x: mouseX, y: mouseY }}
-                className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[140px] pointer-events-none z-20"
+                className="absolute top-1/4 -right-20 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/10 rounded-full blur-[80px] md:blur-[140px] pointer-events-none z-20"
             />
             <motion.div
                 style={{ x: useTransform(mouseX, x => x * -1.2), y: useTransform(mouseY, y => y * -1.2) }}
-                className="absolute -bottom-40 -left-20 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none z-20"
+                className="absolute -bottom-40 -left-20 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-indigo-500/5 rounded-full blur-[70px] md:blur-[120px] pointer-events-none z-20"
             />
 
             {/* Animated Grid Decoration */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none z-30" />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-5xl"
+                    className="w-full flex flex-col items-start"
                 >
-                    <motion.div
-                        variants={itemVariants}
-                        className="inline-flex items-center space-x-2 glass px-3 py-1 rounded-full mb-8"
-                    >
-                        <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60">
-                            The New Standard of Digital
-                        </span>
-                    </motion.div>
-
-                    <TextReveal
-                        text="Define The Echelon Experience."
-                        className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.8] mb-10"
-                    />
+                    <div className="mb-4 lg:mb-6 w-full flex flex-col items-start">
+                        <TextReveal
+                            text="Define"
+                            className="text-xl md:text-3xl lg:text-4xl font-bold tracking-[0.3em] lg:tracking-[0.5em] uppercase text-white/20 mb-2 lg:mb-4"
+                            delay={0.1}
+                            align="left"
+                        />
+                        <TextReveal
+                            text="The"
+                            className="text-4xl md:text-7xl lg:text-8xl font-serif italic font-light leading-none mb-1 lg:mb-2"
+                            delay={0.3}
+                            align="left"
+                        />
+                        <TextReveal
+                            text="ECHELON"
+                            className="text-[12vw] md:text-[8rem] lg:text-[10rem] font-bold tracking-tighter leading-[0.7] mb-4 lg:mb-6"
+                            delay={0.5}
+                            align="left"
+                        />
+                        <TextReveal
+                            text="Experience."
+                            className="text-2xl md:text-6xl lg:text-7xl font-serif italic text-gradient leading-none"
+                            delay={0.7}
+                            align="left"
+                        />
+                    </div>
 
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg md:text-2xl text-white/30 max-w-2xl mb-14 leading-relaxed font-light"
+                        className="text-white/40 text-sm md:text-xl font-light max-w-xl lg:max-w-2xl leading-relaxed mb-8 lg:mb-10 text-left"
                     >
-                        Built to Grow. Designed to Lead.
+                        We architect high-performance digital worlds for elite brands that demand absolute precision and cinematic excellence.
                     </motion.p>
 
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8"
+                        className="flex flex-col sm:flex-row items-stretch sm:items-start justify-start space-y-4 sm:space-y-0 sm:space-x-8 w-full sm:w-auto"
                     >
+
+
                         <Magnetic>
                             <button
                                 onClick={openChat}

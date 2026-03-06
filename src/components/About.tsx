@@ -3,16 +3,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function About() {
+interface AboutProps {
+    hideHeader?: boolean;
+}
+
+export default function About({ hideHeader = false }: AboutProps) {
     return (
-        <section className="py-40 relative bg-black overflow-hidden">
+        <section id="about" className="relative h-screen flex items-center bg-black overflow-hidden">
             {/* Background Decorative Element */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(100,116,255,0.05),transparent_50%)]" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-24">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 h-full py-20 lg:py-0">
                     {/* Left Column: The Nexus of Innovation (Image Collage) */}
-                    <div className="lg:w-1/2 w-full">
+                    <div className="lg:w-1/2 w-full flex justify-center scale-75 sm:scale-90 lg:scale-100">
                         <div className="relative aspect-square max-w-xl mx-auto">
                             {/* Main Layer */}
                             <motion.div
@@ -61,23 +65,28 @@ export default function About() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1 }}
+                            className="text-center lg:text-left"
                         >
-                            <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Innovation Nexus</h2>
-                            <h3 className="text-5xl md:text-7xl font-bold tracking-tighter mb-10">
-                                Engineering <br />
-                                <span className="text-gradient italic font-serif">Future-Proof</span> <br />
-                                Ecosystems.
-                            </h3>
+                            {!hideHeader && (
+                                <>
+                                    <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Innovation Nexus</h2>
+                                    <h3 className="text-4xl md:text-7xl font-bold tracking-tighter mb-8 md:mb-10 leading-tight">
+                                        Engineering <br />
+                                        <span className="text-gradient italic font-serif">Future-Proof</span> <br />
+                                        Ecosystems.
+                                    </h3>
 
-                            <p className="text-white/40 text-lg leading-relaxed font-light mb-12 max-w-lg">
-                                Ascendia bridges the void between complex technology and cinematic human experience. We architect digital worlds that don't just exist—they evolve.
-                            </p>
+                                    <p className="text-white/40 text-sm md:text-lg leading-relaxed font-light mb-8 md:mb-12 max-w-lg mx-auto lg:mx-0">
+                                        Ascendia bridges the void between complex technology and cinematic human experience. We architect digital worlds that don't just exist—they evolve.
+                                    </p>
+                                </>
+                            )}
 
                             <div className="space-y-10">
                                 {[
-                                    { label: "Architectural Efficiency", value: 98, suffix: "%" },
-                                    { label: "Security Encryption", value: 100, suffix: "+" },
-                                    { label: "Global Market Reach", value: 45, suffix: "M" }
+                                    { label: "Architectural Efficiency", display: "98", suffix: "%", progress: 98 },
+                                    { label: "Completed Projects", display: "03", suffix: "", progress: 100 },
+                                    { label: "Ongoing Initiatives", display: "02", suffix: "", progress: 65 }
                                 ].map((metric, i) => (
                                     <div key={metric.label} className="group">
                                         <div className="flex justify-between items-end mb-4">
@@ -85,16 +94,16 @@ export default function About() {
                                                 {metric.label}
                                             </span>
                                             <span className="text-2xl font-bold text-accent tracking-tighter">
-                                                {metric.value}{metric.suffix}
+                                                {metric.display}{metric.suffix}
                                             </span>
                                         </div>
-                                        <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                        <div className="h-[1px] w-full bg-white/10 overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
-                                                whileInView={{ width: `${metric.value}%` }}
+                                                whileInView={{ width: `${metric.progress}%` }}
                                                 viewport={{ once: true }}
                                                 transition={{ duration: 1.5, delay: 0.5 + (i * 0.2), ease: "circOut" }}
-                                                className="h-full bg-accent shadow-[0_0_20px_rgba(100,116,255,0.5)]"
+                                                className="h-full bg-accent shadow-[0_0_20px_rgba(100,116,255,0.4)]"
                                             />
                                         </div>
                                     </div>

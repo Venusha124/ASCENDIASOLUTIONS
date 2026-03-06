@@ -113,7 +113,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
     );
 };
 
-export default function Projects() {
+interface ProjectsProps {
+    hideHeader?: boolean;
+}
+
+export default function Projects({ hideHeader = false }: ProjectsProps) {
     const [activeCategory, setActiveCategory] = useState("All");
 
     const filteredProjects = useMemo(() => {
@@ -122,10 +126,10 @@ export default function Projects() {
     }, [activeCategory]);
 
     return (
-        <section id="projects" className="py-24 md:py-40 bg-black overflow-hidden">
+        <section id="projects" className="relative h-screen flex items-center bg-black overflow-hidden">
             <div className="container mx-auto px-6">
                 {/* Premium Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
+                <div className={`flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12 ${hideHeader ? 'hidden' : ''}`}>
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -192,14 +196,14 @@ export default function Projects() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-40 text-center"
+                    className="mt-12 md:mt-20 text-center"
                 >
-                    <p className="text-white/20 text-sm font-light uppercase tracking-widest mb-10">Searching for something more specific?</p>
+                    <p className="text-white/50 text-sm font-light uppercase tracking-widest mb-6 lg:mb-10">Searching for something more specific?</p>
                     <Magnetic>
                         <Link href="/contact" className="inline-flex items-center space-x-6 group">
                             <span className="text-2xl md:text-3xl font-bold tracking-tighter group-hover:text-accent transition-colors">Start a new project sequence</span>
-                            <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-500">
-                                <ArrowRight className="transform group-hover:scale-125 transition-transform" />
+                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-500">
+                                <ArrowRight className="transform group-hover:scale-125 transition-transform" size={20} />
                             </div>
                         </Link>
                     </Magnetic>

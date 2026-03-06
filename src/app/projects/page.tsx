@@ -11,7 +11,7 @@ export default function ProjectsPage() {
                 subtitle="A masterwork of digital architecture crafted for the most discerning elite brand."
                 backgroundImage="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
             />
-            <Projects />
+            <Projects hideHeader={true} />
         </PageWrapper>
     );
 }

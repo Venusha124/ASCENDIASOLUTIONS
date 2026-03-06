@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "ascendiasolutions@proton.lk",
+      to: "ascendiasolutions@proton.me",
       subject: `New Inquiry [${tier}] from Ascendia Website`,
       replyTo: email,
       text: `

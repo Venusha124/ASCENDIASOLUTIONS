@@ -7,59 +7,68 @@ interface TextRevealProps {
     text: string;
     className?: string;
     delay?: number;
+    align?: "left" | "center" | "right";
 }
 
-export default function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
+export default function TextReveal({ text, className, delay = 0, align = "left" }: TextRevealProps) {
     const words = text.split(" ");
 
-    const container: any = {
-        hidden: { opacity: 0 },
-        visible: (i = 1) => ({
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: delay * 0.1 + 0.3 },
-        }),
+    const alignmentClasses = {
+        left: "justify-start text-left",
+        center: "justify-center text-center",
+        right: "justify-end text-right",
     };
 
-    const child: any = {
+    const container = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.12,
+                delayChildren: delay + 0.5,
+            },
+        },
+    };
+
+    const child = {
         visible: {
             opacity: 1,
             y: 0,
+            filter: "blur(0px)",
+            scale: 1,
             transition: {
-                type: "spring",
-                damping: 12,
-                stiffness: 100,
+                duration: 1.2,
+                ease: [0.16, 1, 0.3, 1] as any,
             },
         },
         hidden: {
             opacity: 0,
             y: 20,
-            transition: {
-                type: "spring",
-                damping: 12,
-                stiffness: 100,
-            },
+            filter: "blur(10px)",
+            scale: 1.1,
         },
     };
 
     return (
         <motion.div
-            className={`flex flex-wrap ${className}`}
+            className={`flex flex-wrap items-center ${alignmentClasses[align]} ${className}`}
             variants={container}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible"
         >
             {words.map((word, index) => (
                 <motion.span
                     variants={child}
-                    className="mr-[0.25em] mb-[0.1em]"
+                    className="inline-block mr-[0.2em] mb-[0.1em]"
                     key={index}
                 >
-                    {word === "The" || word === "Experience." || word === "Echelon" ? (
-                        <span className="text-gradient">{word}</span>
-                    ) : (
-                        word
-                    )}
+                    <span className={
+                        word.includes("The") || word.includes("Experience") || word.includes("Echelon")
+                            ? "text-gradient"
+                            : ""
+                    }>
+                        {word}
+                    </span>
                 </motion.span>
             ))}
         </motion.div>

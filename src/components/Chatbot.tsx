@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, User, Bot, Sparkles, MessageSquare } from 'lucide-react';
+import { X, Send, User, Bot, Sparkles, MessageSquare, Mail, Instagram, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { useChat } from '@/context/ChatContext';
 
 interface Message {
@@ -24,6 +25,7 @@ const Chatbot: React.FC = () => {
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
+    const [userMessageCount, setUserMessageCount] = useState(0);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -33,6 +35,58 @@ const Chatbot: React.FC = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isTyping]);
+
+    const getBotResponse = (input: string): string => {
+        const query = input.toLowerCase();
+
+        // Specific Keyword Matches
+        if (query.includes('price') || query.includes('cost') || query.includes('rate')) {
+            return "Our elite digital solutions are bespoke. Investment tiers vary based on your project's complexity and desired 'Digital Zenith'. Luxury branding starts at a premium entry, while enterprise ecosystems are quoted after a strategic audit. Would you like a consultation?";
+        }
+
+        if (query.includes('service') || query.includes('what do you do') || query.includes('offer')) {
+            return "We architect 'Digital Prestige'. Our core focus areas are Luxury Branding, High-Performance Web Ecosystems, and Strategic Digital Consulting. Each is designed to elevate your brand to the echelon level.";
+        }
+
+        if (query.includes('contact') || query.includes('talk') || query.includes('reach out') || query.includes('call')) {
+            return "To discuss your vision in detail, you can use our 'Let's Talk' portal or email our strategy team directly at visions@ascendia.com. We typically respond to elite inquiries within 4-6 business hours.";
+        }
+
+        if (query.includes('portfolio') || query.includes('work') || query.includes('projects')) {
+            return "Our portfolio is a classified collection of digital masterpieces. You can view our public highlights in the 'Projects' section, or we can provide a curated deck during a private briefing.";
+        }
+
+        if (query.includes('who are you') || query.includes('about')) {
+            return "I am the Digital Concierge for Ascendia - a boutique architecture firm for the digital age. We don't just build websites; we create digital legacies.";
+        }
+
+        if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
+            return "Greetings. How may I assist you in your pursuit of digital excellence today?";
+        }
+
+        if (query.includes('digital architecture')) {
+            return "Digital Architecture at Ascendia involves structural perfection and aesthetic dominance. We build foundations that scale while maintaining a premium user experience.";
+        }
+
+        if (query.includes('luxury branding')) {
+            return "Luxury Branding is more than a logo; it's an aura. We craft visual identities that resonate with authority and elegance across all digital touchpoints.";
+        }
+
+        if (query.includes('strategic audit')) {
+            return "Our Strategic Audit analyzes your current digital footprint against echelon standards. It identifies gaps in prestige, performance, and conversion potential.";
+        }
+
+        // Generic Fallback Pool to avoid repetition
+        const fallbacks = [
+            "That is an intriguing inquiry. Our specialists are best equipped to handle specific technical nuances. Shall I flag this for a strategist?",
+            "I have noted your transmission. To provide the precision Ascendia is known for, could you elaborate on your project's specific objectives?",
+            "Ascendia's approach is highly personalized. While I process your request, would you like to explore our core services or project gallery?",
+            "Understood. Our Digital Concierge system is constantly evolving. For immediate assistance with your specific question, our 'Let's Talk' portal is the most direct route."
+        ];
+
+        // Basic randomization using input length to keep it consistent but varied
+        return fallbacks[input.length % fallbacks.length];
+    };
 
     const handleSend = async () => {
         if (!inputValue.trim()) return;
@@ -47,15 +101,15 @@ const Chatbot: React.FC = () => {
         setMessages(prev => [...prev, userMsg]);
         setInputValue('');
         setIsTyping(true);
+        setUserMessageCount(prev => prev + 1);
 
         // Simulate AI Thinking
         setTimeout(() => {
-            let botText = "I have received your transmission. Our specialists will analyze your requirements. Would you like to schedule a strategic briefing?";
+            let botText = getBotResponse(userMsg.text);
 
-            if (inputValue.toLowerCase().includes('price') || inputValue.toLowerCase().includes('cost')) {
-                botText = "Elite solutions are investment-based. We tailor our tiers to your specific digital zenith. Luxury Branding starts at a premium entry level. Shall I have a consultant reach out?";
-            } else if (inputValue.toLowerCase().includes('service') || inputValue.toLowerCase().includes('what do you do')) {
-                botText = "We architect Digital Prestige. This includes Luxury Branding, Enterprise Web Ecosystems, and Strategic Digital Consulting. Which tier interests you?";
+            // Check if limit is reached (userMessageCount + 1 because the state update is async)
+            if (userMessageCount + 1 >= 5) {
+                botText = "To provide you with the echelon service you deserve, I've prepared our direct contact details. For comprehensive inquiries, please reach out via email at ascendiasolutions@proton.me, through our Instagram @ascendiasolutions.lk, or use our formal inquiry portal below.";
             }
 
             const botMsg: Message = {
@@ -67,7 +121,7 @@ const Chatbot: React.FC = () => {
 
             setMessages(prev => [...prev, botMsg]);
             setIsTyping(false);
-        }, 1500);
+        }, 1200);
     };
 
     return (
@@ -125,10 +179,36 @@ const Chatbot: React.FC = () => {
                                 >
                                     <div className={`max-w-[85%] space-y-2 ${msg.sender === 'user' ? 'items-end' : 'items-start'} flex flex-col`}>
                                         <div className={`p-5 rounded-2xl text-sm leading-relaxed border ${msg.sender === 'user'
-                                                ? 'bg-accent border-accent text-white rounded-tr-none'
-                                                : 'bg-white/[0.03] border-white/5 text-white/70 rounded-tl-none'
+                                            ? 'bg-accent border-accent text-white rounded-tr-none'
+                                            : 'bg-white/[0.03] border-white/5 text-white/70 rounded-tl-none'
                                             }`}>
                                             {msg.text}
+
+                                            {msg.sender === 'bot' && userMessageCount >= 5 && msg.id === messages[messages.length - 1]?.id && (
+                                                <div className="mt-6 pt-6 border-t border-white/10 space-y-4">
+                                                    <div className="flex flex-col space-y-2">
+                                                        <span className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Direct Channels</span>
+                                                        <div className="flex flex-col space-y-1">
+                                                            <a href="mailto:ascendiasolutions@proton.me" className="text-accent hover:underline flex items-center space-x-2">
+                                                                <Mail size={12} />
+                                                                <span>ascendiasolutions@proton.me</span>
+                                                            </a>
+                                                            <a href="https://instagram.com/ascendiasolutions.lk" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline flex items-center space-x-2">
+                                                                <Instagram size={12} />
+                                                                <span>@ascendiasolutions.lk</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <Link
+                                                        href="/contact"
+                                                        onClick={closeChat}
+                                                        className="flex items-center justify-between w-full bg-accent/10 border border-accent/20 hover:bg-accent/20 p-4 rounded-xl transition-all group"
+                                                    >
+                                                        <span className="text-xs font-bold uppercase tracking-widest text-white">Open Inquiry Portal</span>
+                                                        <ArrowUpRight size={14} className="text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                                                    </Link>
+                                                </div>
+                                            )}
                                         </div>
                                         <span className="text-[10px] text-white/20 uppercase tracking-widest px-2">
                                             {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

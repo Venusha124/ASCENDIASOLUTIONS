@@ -120,8 +120,8 @@ export default function Contact() {
                                             <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500">
                                                 <Mail size={16} />
                                             </div>
-                                            <a href="mailto:ascendiasolutions@proton.lk" className="text-xl font-medium tracking-tighter hover:text-white transition-colors">
-                                                ascendiasolutions@proton.lk
+                                            <a href="mailto:ascendiasolutions@proton.me" className="text-xl font-medium tracking-tighter hover:text-white transition-colors">
+                                                ascendiasolutions@proton.me
                                             </a>
                                         </div>
                                     </div>

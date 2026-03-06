@@ -61,7 +61,7 @@ export default function Footer() {
                         <div className="flex items-center space-x-4 md:space-x-6">
                             {[
                                 { icon: Instagram, href: "https://www.instagram.com/ascendiasolutions.lk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
-                                { icon: Mail, href: "mailto:ascendiasolutions@proton.lk", label: "Email" }
+                                { icon: Mail, href: "mailto:ascendiasolutions@proton.me", label: "Email" }
                             ].map((social, i) => (
                                 <Magnetic key={i}>
                                     <a

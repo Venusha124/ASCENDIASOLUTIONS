@@ -33,7 +33,7 @@ const steps = [
 
 export default function Process() {
     return (
-        <section className="py-40 relative bg-black overflow-hidden">
+        <section className="relative h-screen flex items-center bg-black overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

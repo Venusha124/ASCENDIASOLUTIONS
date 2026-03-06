@@ -14,7 +14,7 @@ export default function AboutPage() {
                 subtitle="ASCENDIA was founded on the principle that digital experiences should be as refined as the luxury brands they represent."
                 backgroundImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
             />
-            <About />
+            <About hideHeader={true} />
             <AboutVision />
             <AboutValues />
             <Leadership />

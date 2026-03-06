@@ -33,9 +33,9 @@ export default function Navigation() {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-4" : "py-8"
                 }`}
         >
-            <div className="container mx-auto px-6">
+            <div className={`max-w-7xl mx-auto px-6 w-full relative z-10 flex justify-center transition-all duration-500`}>
                 <div
-                    className={`glass rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500 ${scrolled ? "bg-black/60 shadow-2xl" : "bg-transparent"
+                    className={`glass rounded-full px-6 py-3 flex items-center justify-between w-full transition-all duration-500 ${scrolled ? "bg-black/60 shadow-2xl" : "bg-transparent"
                         }`}
                 >
                     {/* Logo & Availability */}
@@ -79,10 +79,15 @@ export default function Navigation() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden text-white"
+                        className="md:hidden flex items-center space-x-3 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10 transition-all duration-300"
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
+                            {isOpen ? "Close" : "Menu"}
+                        </span>
+                        <div className="text-white">
+                            {isOpen ? <X size={20} /> : <Menu size={20} />}
+                        </div>
                     </button>
                 </div>
             </div>
