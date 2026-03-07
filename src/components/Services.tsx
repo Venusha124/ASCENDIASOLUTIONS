@@ -45,7 +45,7 @@ interface ServicesProps {
 
 export default function Services({ hideHeader = false }: ServicesProps) {
     return (
-        <section id="services" className="relative h-screen flex items-center bg-[#050505] overflow-hidden">
+        <section id="services" className="relative min-h-screen flex items-center bg-[#050505] overflow-hidden py-24 md:py-0">
             {/* Background Tech Image Overlay */}
             <div className="absolute inset-0 z-0">
                 <img
@@ -55,23 +55,24 @@ export default function Services({ hideHeader = false }: ServicesProps) {
                 />
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="section-container relative z-10">
                 {!hideHeader && (
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="mb-24"
+                        className="mb-16 md:mb-24"
                     >
-                        <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Expertise</h2>
-                        <h3 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-2xl">
-                            Uncompromising <span className="text-white/20">Digital Architecture.</span>
+                        <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-accent mb-6">Expertise</h2>
+                        <h3 className="text-3xl md:text-7xl font-bold tracking-tighter max-w-2xl leading-[1.1]">
+                            Uncompromising <br />
+                            <span className="text-white/20">Digital Architecture.</span>
                         </h3>
                     </motion.div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 -mx-4 md:-mx-10">
                     {services.map((service, index) => (
                         <motion.div
                             key={service.title}
@@ -79,19 +80,19 @@ export default function Services({ hideHeader = false }: ServicesProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="group relative p-10 bg-black/40 border border-white/[0.03] rounded-[2.5rem] hover:bg-white/[0.02] hover:border-white/[0.08] transition-all duration-700 overflow-hidden flex flex-col h-full"
+                            className="group relative p-6 md:p-10 bg-black/40 border border-white/[0.03] rounded-[2rem] md:rounded-[2.5rem] hover:bg-white/[0.02] hover:border-white/[0.08] transition-all duration-700 overflow-hidden flex flex-col h-full"
                         >
                             {/* Accent Glow */}
                             <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                             <Magnetic>
-                                <div className="mb-8 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.03] text-accent border border-white/[0.05] group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-700">
-                                    <service.icon size={28} />
+                                <div className="mb-6 md:mb-8 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-xl md:rounded-2xl bg-white/[0.03] text-accent border border-white/[0.05] group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-700">
+                                    <service.icon size={26} />
                                 </div>
                             </Magnetic>
 
-                            <h4 className="text-2xl font-bold mb-4 tracking-tight">{service.title}</h4>
-                            <p className="text-zinc-400 text-base leading-relaxed font-light mb-8 flex-grow">
+                            <h4 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 tracking-tight">{service.title}</h4>
+                            <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-light mb-6 md:mb-8 flex-grow">
                                 {service.description}
                             </p>
 

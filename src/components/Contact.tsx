@@ -78,26 +78,27 @@ export default function Contact() {
     };
 
     return (
-        <section className="py-40 relative bg-black overflow-hidden">
+        <section id="contact" className="py-24 md:py-40 relative bg-black overflow-hidden">
             {/* Background Narrative Glow */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(100,116,255,0.08),transparent_70%)]" />
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+            <div className="section-container relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 items-start">
 
                     {/* Left Column: Global Access Hub */}
-                    <div className="lg:col-span-4 space-y-16">
+                    <div className="lg:col-span-4 space-y-12 md:space-y-16">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1 }}
+                            className="text-left"
                         >
-                            <h2 className="text-xs font-bold uppercase tracking-[0.8em] text-accent mb-12">Global Access</h2>
+                            <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.8em] text-accent mb-12">Global Access</h2>
 
-                            <div className="space-y-12">
+                            <div className="space-y-10 md:space-y-12">
                                 {/* Availability Status */}
-                                <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] relative overflow-hidden group">
+                                <div className="p-6 md:p-8 rounded-[2rem] md:rounded-3xl bg-white/[0.02] border border-white/[0.05] relative overflow-hidden group">
                                     <div className="absolute top-0 right-0 p-4 opacity-10 text-accent group-hover:scale-110 transition-transform duration-700">
                                         <Globe size={40} />
                                     </div>
@@ -107,20 +108,20 @@ export default function Contact() {
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
                                         </span>
-                                        <span className="text-lg font-bold tracking-tight">Accepting Elite Projects</span>
+                                        <span className="text-base md:text-lg font-bold tracking-tight">Accepting Elite Projects</span>
                                     </div>
-                                    <p className="mt-4 text-sm text-white/20 font-light">Global reach, boutique attention.</p>
+                                    <p className="mt-4 text-[13px] md:text-sm text-white/20 font-light">Global reach, boutique attention.</p>
                                 </div>
 
                                 {/* Contact Methods */}
-                                <div className="space-y-8 pl-4">
+                                <div className="space-y-8 pl-2 md:pl-4">
                                     <div className="group cursor-pointer">
                                         <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20 mb-2 group-hover:text-accent transition-colors">Direct Correspondence</p>
                                         <div className="flex items-center space-x-4">
                                             <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500">
                                                 <Mail size={16} />
                                             </div>
-                                            <a href="mailto:ascendiasolutions@proton.me" className="text-xl font-medium tracking-tighter hover:text-white transition-colors">
+                                            <a href="mailto:ascendiasolutions@proton.me" className="text-lg md:text-xl font-medium tracking-tighter hover:text-white transition-colors">
                                                 ascendiasolutions@proton.me
                                             </a>
                                         </div>
@@ -132,7 +133,7 @@ export default function Contact() {
                                             <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500">
                                                 <Instagram size={16} />
                                             </div>
-                                            <a href="https://www.instagram.com/ascendiasolutions.lk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-xl font-medium tracking-tighter hover:text-white transition-colors">
+                                            <a href="https://www.instagram.com/ascendiasolutions.lk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium tracking-tighter hover:text-white transition-colors">
                                                 @ascendiasolutions.lk
                                             </a>
                                         </div>
@@ -149,7 +150,7 @@ export default function Contact() {
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
-                            className="bg-[#080808] border border-white/[0.05] rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 relative shadow-2xl"
+                            className="bg-[#080808] border border-white/[0.05] rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 relative shadow-2xl text-left"
                         >
                             <AnimatePresence mode="wait">
                                 {formState === "success" ? (

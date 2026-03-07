@@ -14,11 +14,11 @@ export default function PageHeader({ title, subtitle, accent, backgroundImage }:
     const y = useTransform(scrollY, [0, 500], [0, 200]);
 
     return (
-        <section className="relative h-screen flex items-center overflow-hidden bg-black">
+        <section className="relative min-h-[60vh] md:h-screen flex items-center overflow-hidden bg-black pt-20 md:pt-0">
             {/* Background Image with Parallax */}
             {backgroundImage && (
                 <motion.div
-                    style={{ y }}
+                    style={{ y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : y }}
                     className="absolute inset-0 z-0"
                 >
                     <img
@@ -31,9 +31,9 @@ export default function PageHeader({ title, subtitle, accent, backgroundImage }:
             )}
 
             {/* Background Decorative Accent */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none z-1" />
+            <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-1" />
 
-            <div className="container mx-auto px-6 relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="section-container relative z-10 flex flex-col items-start text-left">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -47,9 +47,9 @@ export default function PageHeader({ title, subtitle, accent, backgroundImage }:
                     )}
                     <TextReveal
                         text={title}
-                        className="text-4xl md:text-8xl font-bold tracking-tighter leading-none mb-6 md:mb-8"
+                        className="text-3xl md:text-8xl font-bold tracking-tighter leading-none mb-6 md:mb-8"
                     />
-                    <p className="text-white/40 text-lg md:text-2xl font-light leading-relaxed max-w-2xl bg-black/20 backdrop-blur-sm p-2 rounded-lg">
+                    <p className="text-white/40 text-[15px] md:text-2xl font-light leading-relaxed max-w-2xl bg-black/20 backdrop-blur-sm p-3 rounded-lg">
                         {subtitle}
                     </p>
                 </motion.div>

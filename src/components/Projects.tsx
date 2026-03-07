@@ -126,29 +126,29 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
     }, [activeCategory]);
 
     return (
-        <section id="projects" className="relative h-screen flex items-center bg-black overflow-hidden">
-            <div className="container mx-auto px-6">
+        <section id="projects" className="relative min-h-screen flex items-center bg-black overflow-hidden py-24 md:py-0">
+            <div className="section-container relative z-10">
                 {/* Premium Header */}
-                <div className={`flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12 ${hideHeader ? 'hidden' : ''}`}>
+                <div className={`flex flex-col mb-16 md:mb-24 gap-12 ${hideHeader ? 'hidden' : ''}`}>
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1 }}
                     >
-                        <h2 className="text-xs font-bold uppercase tracking-[0.8em] text-accent mb-6">Archive 2024</h2>
-                        <h3 className="text-5xl md:text-8xl font-bold tracking-tighter max-w-2xl leading-tight">
+                        <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.8em] text-accent mb-6">Archive 2024</h2>
+                        <h3 className="text-3xl md:text-8xl font-bold tracking-tighter max-w-2xl leading-[1.1]">
                             Digital artifacts built for the <span className="text-gradient italic font-serif">Elite.</span>
                         </h3>
                     </motion.div>
 
                     {/* Filter Bar */}
-                    <div className="flex flex-wrap gap-4 p-2 rounded-[2rem] bg-white/[0.02] border border-white/[0.05] backdrop-blur-3xl">
+                    <div className="flex flex-wrap gap-3 md:gap-4 p-2 rounded-[1.5rem] md:rounded-[2rem] bg-white/[0.02] border border-white/[0.05] backdrop-blur-3xl self-start">
                         {categories.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-6 py-3 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${activeCategory === cat
+                                className={`px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${activeCategory === cat
                                     ? "bg-accent border-accent text-white shadow-[0_10px_30px_rgba(100,116,255,0.3)]"
                                     : "text-white/30 hover:text-white"
                                     }`}

@@ -9,22 +9,22 @@ interface AboutProps {
 
 export default function About({ hideHeader = false }: AboutProps) {
     return (
-        <section id="about" className="relative h-screen flex items-center bg-black overflow-hidden">
+        <section id="about" className="relative min-h-screen flex items-center bg-black overflow-hidden py-24 md:py-0">
             {/* Background Decorative Element */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(100,116,255,0.05),transparent_50%)]" />
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 h-full py-20 lg:py-0">
+            <div className="section-container relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
                     {/* Left Column: The Nexus of Innovation (Image Collage) */}
-                    <div className="lg:w-1/2 w-full flex justify-center scale-75 sm:scale-90 lg:scale-100">
-                        <div className="relative aspect-square max-w-xl mx-auto">
+                    <div className="lg:w-1/2 w-full flex justify-center scale-90 lg:scale-100 order-2 lg:order-1">
+                        <div className="relative aspect-square w-full max-w-lg">
                             {/* Main Layer */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="absolute inset-0 rounded-[4rem] overflow-hidden border border-white/5"
+                                className="absolute inset-0 rounded-[3rem] md:rounded-[4rem] overflow-hidden border border-white/5"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
@@ -40,7 +40,7 @@ export default function About({ hideHeader = false }: AboutProps) {
                                 whileInView={{ opacity: 1, x: -30, y: 30 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 1.5, delay: 0.3 }}
-                                className="absolute bottom-0 left-0 w-2/3 aspect-video glass rounded-3xl border border-white/10 shadow-2xl overflow-hidden z-20"
+                                className="absolute bottom-0 left-0 w-2/3 aspect-video glass rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl overflow-hidden z-20"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
@@ -53,24 +53,24 @@ export default function About({ hideHeader = false }: AboutProps) {
                             <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-10 right-10 w-32 h-32 rounded-full border-t border-r border-accent/30 z-10"
+                                className="absolute top-10 right-10 w-24 md:w-32 h-24 md:h-32 rounded-full border-t border-r border-accent/30 z-10"
                             />
                         </div>
                     </div>
 
                     {/* Right Column: Evolutionary Metrics */}
-                    <div className="lg:w-1/2 w-full">
+                    <div className="lg:w-1/2 w-full order-1 lg:order-2">
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1 }}
-                            className="text-center lg:text-left"
+                            className="text-center lg:text-left flex flex-col items-center lg:items-start"
                         >
                             {!hideHeader && (
                                 <>
-                                    <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-6">Innovation Nexus</h2>
-                                    <h3 className="text-4xl md:text-7xl font-bold tracking-tighter mb-8 md:mb-10 leading-tight">
+                                    <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-accent mb-6">Innovation Nexus</h2>
+                                    <h3 className="text-3xl md:text-7xl font-bold tracking-tighter mb-8 md:mb-10 leading-[1.1]">
                                         Engineering <br />
                                         <span className="text-gradient italic font-serif">Future-Proof</span> <br />
                                         Ecosystems.
@@ -82,18 +82,18 @@ export default function About({ hideHeader = false }: AboutProps) {
                                 </>
                             )}
 
-                            <div className="space-y-10">
+                            <div className="space-y-8 md:space-y-10">
                                 {[
                                     { label: "Architectural Efficiency", display: "98", suffix: "%", progress: 98 },
                                     { label: "Completed Projects", display: "03", suffix: "", progress: 100 },
                                     { label: "Ongoing Initiatives", display: "02", suffix: "", progress: 65 }
                                 ].map((metric, i) => (
                                     <div key={metric.label} className="group">
-                                        <div className="flex justify-between items-end mb-4">
-                                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 group-hover:text-white transition-colors">
+                                        <div className="flex justify-between items-end mb-3 md:mb-4">
+                                            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/30 group-hover:text-white transition-colors">
                                                 {metric.label}
                                             </span>
-                                            <span className="text-2xl font-bold text-accent tracking-tighter">
+                                            <span className="text-xl md:text-2xl font-bold text-accent tracking-tighter">
                                                 {metric.display}{metric.suffix}
                                             </span>
                                         </div>

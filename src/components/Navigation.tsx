@@ -30,18 +30,18 @@ export default function Navigation() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-4" : "py-8"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 md:py-4" : "py-4 md:py-8"
                 }`}
         >
-            <div className={`max-w-7xl mx-auto px-6 w-full relative z-10 flex justify-center transition-all duration-500`}>
+            <div className={`section-container relative z-10 flex justify-center transition-all duration-500`}>
                 <div
-                    className={`glass rounded-full px-6 py-3 flex items-center justify-between w-full transition-all duration-500 ${scrolled ? "bg-black/60 shadow-2xl" : "bg-transparent"
+                    className={`glass rounded-full pr-6 pl-2 py-2 md:py-3 flex items-center justify-between w-full transition-all duration-500 ${scrolled ? "bg-black/60 shadow-2xl" : "bg-transparent"
                         }`}
                 >
                     {/* Logo & Availability */}
                     <div className="flex items-center space-x-6">
                         <Magnetic>
-                            <Link href="/" className="text-2xl font-bold tracking-tighter">
+                            <Link href="/" className="text-2xl font-bold tracking-tighter pl-4">
                                 ASCENDIA<span className="text-accent text-[6px] align-top ml-1">TM</span>
                             </Link>
                         </Magnetic>
@@ -99,9 +99,22 @@ export default function Navigation() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-[30px] md:hidden pt-40 px-6"
+                        className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-[30px] md:hidden overflow-y-auto"
                     >
-                        <div className="flex flex-col items-center justify-center space-y-12">
+                        {/* Close Button Inside Menu */}
+                        <div className="flex justify-end p-8 pt-12">
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="flex items-center space-x-3 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full border border-white/10 transition-all duration-300"
+                            >
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Close</span>
+                                <div className="text-white">
+                                    <X size={24} />
+                                </div>
+                            </button>
+                        </div>
+
+                        <div className="flex flex-col items-center justify-center space-y-10 py-20 px-6">
                             {navLinks.map((link, i) => (
                                 <motion.div
                                     key={link.name}
@@ -130,7 +143,7 @@ export default function Navigation() {
                                         setIsOpen(false);
                                         openChat();
                                     }}
-                                    className="bg-white text-black px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                                    className="bg-white text-black px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all shadow-[0_20px_40px_rgba(0,0,0,0.3)] active:scale-95"
                                 >
                                     Let&apos;s Talk
                                 </button>
