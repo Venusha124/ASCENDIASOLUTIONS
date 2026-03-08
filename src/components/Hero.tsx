@@ -111,7 +111,7 @@ export default function Hero() {
                         <div className="overflow-hidden w-full">
                             <TextReveal
                                 text="ECHELON"
-                                className="text-[11vw] xs:text-[13vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] font-bold tracking-tighter leading-[0.8] md:leading-[0.7] mb-2 md:mb-6"
+                                className="text-[10vw] xs:text-[12vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] font-bold tracking-tighter leading-[0.8] md:leading-[0.7] mb-2 md:mb-6"
                                 delay={0.5}
                                 align="left"
                             />
@@ -126,7 +126,7 @@ export default function Hero() {
 
                     <motion.p
                         variants={itemVariants}
-                        className="text-white/40 text-[12px] xs:text-[13px] md:text-xl font-light max-w-[90%] sm:max-w-xl lg:max-w-2xl leading-relaxed mb-8 lg:mb-10 text-left"
+                        className="text-white/40 text-[11px] xs:text-[13px] md:text-xl font-light max-w-full sm:max-w-xl lg:max-w-2xl leading-relaxed mb-8 lg:mb-10 text-left pr-4"
                     >
                         We architect high-performance digital worlds for elite brands that demand absolute precision and cinematic excellence.
                     </motion.p>
@@ -138,7 +138,7 @@ export default function Hero() {
                         <Magnetic>
                             <button
                                 onClick={openChat}
-                                className="bg-white text-black px-6 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.15em] xs:tracking-[0.2em] text-[9px] xs:text-[10px] flex items-center justify-center space-x-2 xs:space-x-3 hover:bg-accent hover:text-white transition-all duration-700 premium-shadow"
+                                className="bg-white text-black px-5 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.1em] xs:tracking-[0.2em] text-[8px] xs:text-[10px] flex items-center justify-center space-x-2 xs:space-x-3 hover:bg-accent hover:text-white transition-all duration-700 premium-shadow"
                             >
                                 <span>Start Inquiry</span>
                                 <ArrowRight size={14} />
@@ -146,7 +146,7 @@ export default function Hero() {
                         </Magnetic>
                         <Magnetic>
                             <Link href="/about" className="block">
-                                <button className="group relative px-6 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.15em] xs:tracking-[0.2em] text-[9px] xs:text-[10px] text-white/60 hover:text-white transition-colors duration-500 overflow-hidden text-center w-full">
+                                <button className="group relative px-5 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.1em] xs:tracking-[0.2em] text-[8px] xs:text-[10px] text-white/60 hover:text-white transition-colors duration-500 overflow-hidden text-center w-full">
                                     <span className="relative z-10">Our Philosophy</span>
                                     <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                                 </button>
