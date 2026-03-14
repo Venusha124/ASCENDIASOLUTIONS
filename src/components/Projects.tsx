@@ -167,15 +167,15 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
                                     animate={{ opacity: 1 }}
                                     className="relative w-full py-40 border border-white/[0.05] rounded-[3rem] bg-black overflow-hidden flex flex-col items-center justify-center text-center group"
                                 >
-                                    {/* Looping Cinematic 3D Background */}
-                                    <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen overflow-hidden pointer-events-none">
-                                        <div className="absolute top-1/2 left-1/2 w-[150%] sm:w-[120%] h-[150%] sm:h-[120%] -translate-x-1/2 -translate-y-1/2">
+                                    <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen overflow-hidden pointer-events-none rounded-[3rem]">
+                                        {/* Container scaled responsively to ensure full coverage of the rounded element without exposing gaps */}
+                                        <div className="absolute top-1/2 left-1/2 w-[350%] sm:w-[250%] md:w-[150%] lg:w-[120%] xl:w-[100%] aspect-[16/9] -translate-x-1/2 -translate-y-1/2">
                                             <iframe
                                                 src="https://www.youtube.com/embed/0x5mf8BUJZY?si=gXgRMG6hyKJe6gSa&autoplay=1&mute=1&controls=0&loop=1&playlist=0x5mf8BUJZY&showinfo=0&rel=0"
                                                 title="YouTube video player"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                 referrerPolicy="strict-origin-when-cross-origin"
-                                                className="absolute top-0 left-0 w-full h-full border-0"
+                                                className="absolute top-0 left-0 w-full h-full border-0 pointer-events-none scale-125 md:scale-110"
                                             />
                                         </div>
                                         {/* Gradient Overlay for Legibility */}
