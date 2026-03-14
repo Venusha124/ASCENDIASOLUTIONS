@@ -11,19 +11,6 @@ const categories = ["All", "Strategy", "Web", "Identity"];
 
 const projects: any[] = [];
 
-function SparklesIcon(props: any) {
-    return <Rocket {...props} />;
-}
-function CpuIcon(props: any) {
-    return <Cpu {...props} />;
-}
-function GlobeIcon(props: any) {
-    return <Globe {...props} />;
-}
-function LayersIcon(props: any) {
-    return <Layers {...props} />;
-}
-
 const ProjectCard = ({ project, index }: { project: typeof projects[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
@@ -127,7 +114,7 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
 
     return (
         <section id="projects" className="relative min-h-screen flex items-center bg-black overflow-hidden py-24 md:py-0">
-            <div className="section-container relative z-10">
+            <div className="section-container relative z-10 pt-16 md:pt-32">
                 {/* Premium Header */}
                 <div className={`flex flex-col mb-16 md:mb-24 gap-12 ${hideHeader ? 'hidden' : ''}`}>
                     <motion.div
@@ -178,13 +165,36 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="w-full py-40 border border-white/[0.05] rounded-[3rem] bg-white/[0.02] flex flex-col items-center justify-center text-center backdrop-blur-sm"
+                                    className="relative w-full py-40 border border-white/[0.05] rounded-[3rem] bg-black overflow-hidden flex flex-col items-center justify-center text-center group"
                                 >
-                                    <div className="w-20 h-20 rounded-full bg-accent/5 flex items-center justify-center mb-8 border border-accent/10">
-                                        <Layers className="text-accent/20" size={40} />
+                                    {/* Looping Cinematic 3D Background */}
+                                    <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen overflow-hidden pointer-events-none">
+                                        <div className="absolute top-1/2 left-1/2 w-[150%] sm:w-[120%] h-[150%] sm:h-[120%] -translate-x-1/2 -translate-y-1/2">
+                                            <iframe
+                                                src="https://www.youtube.com/embed/0x5mf8BUJZY?si=gXgRMG6hyKJe6gSa&autoplay=1&mute=1&controls=0&loop=1&playlist=0x5mf8BUJZY&showinfo=0&rel=0"
+                                                title="YouTube video player"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerPolicy="strict-origin-when-cross-origin"
+                                                className="absolute top-0 left-0 w-full h-full border-0"
+                                            />
+                                        </div>
+                                        {/* Gradient Overlay for Legibility */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-80" />
                                     </div>
-                                    <p className="text-white/40 text-xl font-light tracking-wide italic">Digital artifacts are currently being processed in the Echelon.</p>
-                                    <p className="text-white/10 text-xs uppercase tracking-[0.4em] font-bold mt-4">Archives Updating...</p>
+
+                                    {/* Glassmorphism Content Container */}
+                                    <div className="relative z-10 flex flex-col items-center">
+                                        <div className="w-20 h-20 rounded-full bg-accent/10 backdrop-blur-md flex items-center justify-center mb-8 border border-accent/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                                            <Layers className="text-accent/40" size={40} />
+                                        </div>
+                                        <p className="text-white/80 text-xl font-light tracking-wide italic max-w-lg px-6 drop-shadow-md">
+                                            Digital artifacts are currently being processed in the Echelon.
+                                        </p>
+                                        <p className="text-white/30 text-xs uppercase tracking-[0.4em] font-bold mt-6">
+                                            Archives Updating...
+                                        </p>
+                                    </div>
                                 </motion.div>
                             )}
                         </motion.div>

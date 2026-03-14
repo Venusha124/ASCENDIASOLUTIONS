@@ -109,7 +109,7 @@ const Chatbot: React.FC = () => {
 
             // Check if limit is reached (userMessageCount + 1 because the state update is async)
             if (userMessageCount + 1 >= 5) {
-                botText = "To provide you with the echelon service you deserve, I've prepared our direct contact details. For comprehensive inquiries, please reach out via email at ascendiasolutions@proton.me, through our Instagram @ascendiasolutions.lk, or use our formal inquiry portal below.";
+                botText = "To provide you with the echelon service you deserve, I've prepared our direct contact details. For comprehensive inquiries, please reach out via email at ascendiasolutions@proton.me, through our Instagram @ascendiasolutions, or use our formal inquiry portal below.";
             }
 
             const botMsg: Message = {
@@ -193,9 +193,9 @@ const Chatbot: React.FC = () => {
                                                                 <Mail size={12} />
                                                                 <span>ascendiasolutions@proton.me</span>
                                                             </a>
-                                                            <a href="https://instagram.com/ascendiasolutions.lk" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline flex items-center space-x-2">
+                                                            <a href="https://instagram.com/ascendiasolutions" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline flex items-center space-x-2">
                                                                 <Instagram size={12} />
-                                                                <span>@ascendiasolutions.lk</span>
+                                                                <span>@ascendiasolutions</span>
                                                             </a>
                                                         </div>
                                                     </div>

@@ -25,7 +25,7 @@ export default function AboutVision() {
                 >
                     <h2 className="text-xs font-bold uppercase tracking-[0.6em] text-accent mb-12">The North Star</h2>
                     <h3 className="text-4xl md:text-7xl font-bold tracking-tighter mb-12 leading-none">
-                        Our Vision is to <span className="text-white/20 italic font-serif">Redefine</span> the Digital Echelon.
+                        Pioneering the <span className="text-white/20 italic font-serif">Future</span> of Digital Architecture.
                     </h3>
                     <div className="h-px w-24 bg-accent/30 mx-auto mb-12" />
                     <p className="text-xl md:text-2xl text-white/50 font-light leading-relaxed">

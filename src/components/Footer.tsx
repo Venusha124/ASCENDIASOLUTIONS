@@ -60,7 +60,7 @@ export default function Footer() {
                         </p>
                         <div className="flex items-center space-x-4 md:space-x-6">
                             {[
-                                { icon: Instagram, href: "https://www.instagram.com/ascendiasolutions.lk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
+                                { icon: Instagram, href: "https://www.instagram.com/ascendiasolutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", label: "Instagram" },
                                 { icon: Mail, href: "mailto:ascendiasolutions@proton.me", label: "Email" }
                             ].map((social, i) => (
                                 <Magnetic key={i}>
@@ -139,10 +139,10 @@ export default function Footer() {
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">System Online</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">Accepting Projects</span>
                                 </div>
                                 <p className="text-[10px] md:text-xs text-white/30 leading-relaxed md:block">
-                                    Allocating resources for Q3/Q4. Studio is reaching capacity.
+                                    Currently onboarding new clients for the upcoming quarter. Limited availability remaining.
                                 </p>
                             </div>
                         </div>

@@ -6,13 +6,15 @@ import { Send, CheckCircle, AlertCircle, Loader2, Mail, Instagram, Globe, Sparkl
 import Magnetic from "./animations/Magnetic";
 
 type FormState = "idle" | "loading" | "success" | "error";
-type Tier = "Luxury Branding" | "Enterprise Web" | "Strategic Consulting" | "Other";
+type Tier = "Luxury Branding" | "Enterprise Web" | "Other";
 
-const tiers: Tier[] = ["Luxury Branding", "Enterprise Web", "Strategic Consulting", "Other"];
+const tiers: Tier[] = ["Luxury Branding", "Enterprise Web", "Other"];
 
 export default function Contact() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [company, setCompany] = useState("");
+    const [phone, setPhone] = useState("");
     const [tier, setTier] = useState<Tier>("Luxury Branding");
     const [message, setMessage] = useState("");
     const [formState, setFormState] = useState<FormState>("idle");
@@ -41,7 +43,7 @@ export default function Contact() {
             const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, tier, message }),
+                body: JSON.stringify({ name, email, company, phone, tier, message }),
             });
 
             if (!res.ok) {
@@ -52,6 +54,8 @@ export default function Contact() {
             setFormState("success");
             setName("");
             setEmail("");
+            setCompany("");
+            setPhone("");
             setMessage("");
         } catch (err: any) {
             setErrorMessage(err.message || "Failed to send. Please try again.");
@@ -133,8 +137,8 @@ export default function Contact() {
                                             <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500">
                                                 <Instagram size={16} />
                                             </div>
-                                            <a href="https://www.instagram.com/ascendiasolutions.lk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium tracking-tighter hover:text-white transition-colors">
-                                                @ascendiasolutions.lk
+                                            <a href="https://www.instagram.com/ascendiasolutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium tracking-tighter hover:text-white transition-colors">
+                                                @ascendiasolutions
                                             </a>
                                         </div>
                                     </div>
@@ -224,6 +228,26 @@ export default function Contact() {
                                                         placeholder="email@vault.com"
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
+                                                        className="w-full bg-white/[0.02] border border-white/[0.05] rounded-2xl px-8 py-6 outline-none focus:border-accent/40 focus:bg-white/[0.04] transition-all duration-500 placeholder:text-white/10"
+                                                    />
+                                                </motion.div>
+                                                <motion.div variants={itemVariants} className="space-y-4">
+                                                    <label className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/20 ml-2">Company / Organization</label>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Ascendia Solutions"
+                                                        value={company}
+                                                        onChange={(e) => setCompany(e.target.value)}
+                                                        className="w-full bg-white/[0.02] border border-white/[0.05] rounded-2xl px-8 py-6 outline-none focus:border-accent/40 focus:bg-white/[0.04] transition-all duration-500 placeholder:text-white/10"
+                                                    />
+                                                </motion.div>
+                                                <motion.div variants={itemVariants} className="space-y-4">
+                                                    <label className="text-[10px] uppercase tracking-[0.4em] font-bold text-white/20 ml-2">Phone Number</label>
+                                                    <input
+                                                        type="tel"
+                                                        placeholder="+1 (555) 000-0000"
+                                                        value={phone}
+                                                        onChange={(e) => setPhone(e.target.value)}
                                                         className="w-full bg-white/[0.02] border border-white/[0.05] rounded-2xl px-8 py-6 outline-none focus:border-accent/40 focus:bg-white/[0.04] transition-all duration-500 placeholder:text-white/10"
                                                     />
                                                 </motion.div>

@@ -68,18 +68,18 @@ export default function About({ hideHeader = false }: AboutProps) {
                             className="text-center lg:text-left flex flex-col items-center lg:items-start"
                         >
                             {!hideHeader && (
-                                <>
+                                <div className="pt-8 md:pt-16">
                                     <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-accent mb-6">Innovation Nexus</h2>
                                     <h3 className="text-3xl md:text-7xl font-bold tracking-tighter mb-8 md:mb-10 leading-[1.1]">
                                         Engineering <br />
-                                        <span className="text-gradient italic font-serif">Future-Proof</span> <br />
+                                        <span className="text-gradient italic font-serif pr-2 md:pr-4">Future-Proof</span> <br />
                                         Ecosystems.
                                     </h3>
 
                                     <p className="text-white/40 text-sm md:text-lg leading-relaxed font-light mb-8 md:mb-12 max-w-lg mx-auto lg:mx-0">
                                         Ascendia bridges the void between complex technology and cinematic human experience. We architect digital worlds that don't just exist—they evolve.
                                     </p>
-                                </>
+                                </div>
                             )}
 
                             <div className="space-y-8 md:space-y-10">

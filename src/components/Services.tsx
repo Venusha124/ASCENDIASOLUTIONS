@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Layers, Monitor, Zap, Globe, ShoppingBag, Target, ArrowUpRight } from "lucide-react";
+import { Layers, Monitor, Zap, Globe, ShoppingBag, Target, ArrowUpRight, Database } from "lucide-react";
 import Magnetic from "./animations/Magnetic";
 
 const services = [
@@ -18,9 +18,9 @@ const services = [
         icon: Layers,
     },
     {
-        title: "E-Commerce",
-        description: "Creating bespoke, conversion-optimized retail platforms designed for the global luxury market.",
-        icon: ShoppingBag,
+        title: "Digital Ecosystems",
+        description: "Seamlessly connecting your platform with proprietary APIs and enterprise third-party integrations.",
+        icon: Database,
     },
     {
         title: "Search Mastery",
@@ -55,7 +55,7 @@ export default function Services({ hideHeader = false }: ServicesProps) {
                 />
             </div>
 
-            <div className="section-container relative z-10">
+            <div className="section-container relative z-10 pt-16 md:pt-24">
                 {!hideHeader && (
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}

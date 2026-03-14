@@ -34,7 +34,7 @@ const steps = [
 export default function Process() {
     return (
         <section id="process" className="relative min-h-screen flex items-center bg-black overflow-hidden py-24 md:py-0">
-            <div className="section-container relative z-10">
+            <div className="section-container relative z-10 pt-16 md:pt-32">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
