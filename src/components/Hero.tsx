@@ -134,24 +134,14 @@ export default function Hero() {
                         className="flex flex-col sm:flex-row items-stretch sm:items-start justify-start space-y-4 sm:space-y-0 sm:space-x-8 w-full sm:w-auto"
                     >
                         <Magnetic>
-<<<<<<< HEAD
-                            <Link href="/contact" className="block">
+                            <Link href="/contact" className="block w-full sm:w-auto">
                                 <button
-                                    className="bg-white text-black px-8 md:px-10 py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] flex items-center justify-center space-x-3 hover:bg-accent hover:text-white transition-all duration-700 premium-shadow w-full"
+                                    className="bg-white text-black px-5 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.1em] xs:tracking-[0.2em] text-[8px] xs:text-[10px] flex items-center justify-center space-x-2 xs:space-x-3 hover:bg-accent hover:text-white transition-all duration-700 premium-shadow w-full"
                                 >
                                     <span>Start Inquiry</span>
                                     <ArrowRight size={14} />
                                 </button>
                             </Link>
-=======
-                            <button
-                                onClick={openChat}
-                                className="bg-white text-black px-5 xs:px-8 md:px-10 py-4 xs:py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.1em] xs:tracking-[0.2em] text-[8px] xs:text-[10px] flex items-center justify-center space-x-2 xs:space-x-3 hover:bg-accent hover:text-white transition-all duration-700 premium-shadow"
-                            >
-                                <span>Start Inquiry</span>
-                                <ArrowRight size={14} />
-                            </button>
->>>>>>> cfac79ecfd75c719d2eb52aa3960e96887a76642
                         </Magnetic>
                         <Magnetic>
                             <Link href="/about" className="block">
