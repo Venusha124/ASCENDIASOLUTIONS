@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Providers } from "@/components/Providers";
 import Chatbot from "@/components/Chatbot";
+import PageTransition from "@/components/PageTransition";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -31,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${cormorant.variable} font-sans selection:bg-indigo-500/30 overflow-x-hidden`}
+        className={`${outfit.variable} ${cormorant.variable} font-sans selection:bg-[#C6A87C]/30 overflow-x-hidden`}
         suppressHydrationWarning
       >
         <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] grain-overlay" />
@@ -41,7 +42,9 @@ export default function RootLayout({
           <SmoothScroll>
             <Navigation />
             <main className="relative min-h-screen">
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
             </main>
             <Footer />
             <Chatbot />

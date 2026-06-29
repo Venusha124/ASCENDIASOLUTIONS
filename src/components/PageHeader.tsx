@@ -14,52 +14,35 @@ export default function PageHeader({ title, subtitle, accent, backgroundImage }:
     const y = useTransform(scrollY, [0, 500], [0, 200]);
 
     return (
-        <section className="relative min-h-[60vh] md:h-screen flex items-center overflow-hidden bg-black pt-20 md:pt-0">
-            {/* Background Image with Parallax */}
-            {backgroundImage && (
-                <motion.div
-                    style={{ y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : y }}
-                    className="absolute inset-0 z-0"
-                >
-                    <img
-                        src={backgroundImage}
-                        alt=""
-                        className="w-full h-full object-cover opacity-40 grayscale-[0.5] contrast-125"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                </motion.div>
-            )}
+        <section className="relative overflow-hidden bg-[#000] pt-32 pb-16 md:pt-48 md:pb-24 border-b border-white/5">
 
-            {/* Background Decorative Accent */}
-            <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-1" />
-
-            <div className="section-container relative z-10 flex flex-col items-start text-left">
+            <div className="section-container relative z-10 flex flex-col items-start text-left w-full">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="max-w-7xl w-full"
+                    className="max-w-5xl w-full"
                 >
-                    {accent && (
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-accent mb-4 md:mb-6 block">
-                            {accent}
-                        </span>
-                    )}
+                    <div className="flex items-center space-x-6 mb-8 md:mb-10">
+                        <div className="w-12 md:w-20 h-[1px] bg-accent/40" />
+                        {accent && (
+                            <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-accent">
+                                {accent}
+                            </span>
+                        )}
+                        <div className="w-12 md:w-20 h-[1px] bg-accent/40" />
+                    </div>
+
                     <TextReveal
                         text={title}
-                        className="text-3xl md:text-8xl font-bold tracking-tighter leading-none mb-6 md:mb-8"
+                        className="text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight leading-[1.05] mb-6 md:mb-10 text-foreground"
                     />
-                    <p className="text-white/40 text-[15px] md:text-2xl font-light leading-relaxed max-w-2xl bg-black/20 backdrop-blur-sm p-3 rounded-lg">
+                    
+                    <p className="text-accent/80 text-lg md:text-2xl font-serif italic leading-relaxed max-w-3xl border-l border-white/10 pl-6 py-2">
                         {subtitle}
                     </p>
                 </motion.div>
             </div>
-
-            {/* Modern Divider */}
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-
-            {/* Grain Overlay */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-0" />
         </section>
     );
 }

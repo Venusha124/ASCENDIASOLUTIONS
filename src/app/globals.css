@@ -4,9 +4,13 @@
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: var(--font-cormorant), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  --color-background: #050505;
-  --color-foreground: #ffffff;
-  --color-accent: #6366f1;
+  --color-background: #050505; /* Pitch Black */
+  --color-foreground: #F5F5F0; /* Off-white / Beige */
+  --color-accent: #C6A87C; /* Muted Gold / Tan */
+  
+  --color-accent-primary: #D4AF37; /* Bright Gold */
+  --color-accent-secondary: #C6A87C; /* Muted Gold */
+  --color-accent-tertiary: #A67C52; /* Deep Gold/Bronze */
 
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
@@ -15,9 +19,9 @@
 
 :root {
   --background: #050505;
-  --foreground: #ffffff;
-  --accent: #6366f1;
-  --selection: rgba(99, 102, 241, 0.3);
+  --foreground: #F5F5F0;
+  --accent: #C6A87C;
+  --selection: rgba(198, 168, 124, 0.2);
 }
 
 @layer base {
@@ -53,6 +57,21 @@
     @apply fixed inset-0 pointer-events-none z-50 opacity-[0.03];
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #C6A87C, #F5F5F0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-modern {
+  background: linear-gradient(135deg, #D4AF37 0%, #C6A87C 50%, #F5F5F0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 html {

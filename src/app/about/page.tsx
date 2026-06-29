@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import About from "@/components/About";
 import AboutVision from "@/components/AboutVision";
 import AboutValues from "@/components/AboutValues";
-import Leadership from "@/components/Leadership";
+import Testimonials from "@/components/Testimonials";
 
 export default function AboutPage() {
     return (
@@ -17,7 +17,7 @@ export default function AboutPage() {
             <About hideHeader={true} />
             <AboutVision />
             <AboutValues />
-            <Leadership />
+            <Testimonials />
         </PageWrapper>
     );
 }

@@ -26,9 +26,9 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-black pt-24 md:pt-40 pb-12 overflow-hidden border-t border-white/[0.03]">
+        <footer className="relative bg-background pt-24 md:pt-40 pb-12 overflow-hidden border-t border-black/5">
             {/* Cinematic Watermark Text */}
-            <div className="absolute -bottom-10 md:-bottom-20 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap">
+            <div className="absolute -bottom-10 md:-bottom-20 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap text-foreground">
                 <h2 className="text-[30vw] md:text-[25vw] font-bold tracking-tighter leading-none">ASCENDIA</h2>
             </div>
 
@@ -48,14 +48,14 @@ export default function Footer() {
                                 <span className="text-3xl md:text-4xl font-bold tracking-tighter group flex items-center">
                                     ASCENDIA
                                     <motion.span
-                                        className="ml-2 w-2 h-2 rounded-full bg-accent"
+                                        className="ml-2 w-2 h-2 rounded-full bg-[#06b6d4]"
                                         animate={{ opacity: [1, 0.4, 1] }}
                                         transition={{ duration: 2, repeat: Infinity }}
                                     />
                                 </span>
                             </Link>
                         </Magnetic>
-                        <p className="text-white/30 text-lg md:text-xl font-light leading-relaxed max-w-md">
+                        <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed max-w-md">
                             Architecting the future of digital prestige. We specialize in elevating brands to their absolute zenith through radical innovation and technical precision.
                         </p>
                         <div className="flex items-center space-x-4 md:space-x-6">
@@ -68,7 +68,7 @@ export default function Footer() {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:bg-accent hover:text-white hover:border-accent transition-all duration-500 group"
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/5 border border-black/5 flex items-center justify-center text-foreground/40 hover:bg-gradient-to-br hover:from-[#06b6d4] hover:to-[#ec4899] hover:text-white hover:border-transparent hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-500 group"
                                         aria-label={social.label}
                                     >
                                         <social.icon size={16} />
@@ -108,7 +108,7 @@ export default function Footer() {
                                     <Magnetic>
                                         <button
                                             onClick={openChat}
-                                            className="text-base md:text-lg font-medium text-white/40 hover:text-white transition-colors flex items-center group cursor-pointer"
+                                            className="text-base md:text-lg font-medium text-foreground/40 hover:text-foreground transition-colors flex items-center group cursor-pointer"
                                         >
                                             Start Inquire
                                             <ArrowUpRight size={14} className="ml-2 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
@@ -121,7 +121,7 @@ export default function Footer() {
                                 ].map((link) => (
                                     <li key={link.name} className="flex justify-center md:justify-start">
                                         <Magnetic>
-                                            <Link href={link.href} className="text-base md:text-lg font-medium text-white/40 hover:text-white transition-colors flex items-center group">
+                                            <Link href={link.href} className="text-base md:text-lg font-medium text-foreground/40 hover:text-foreground transition-colors flex items-center group">
                                                 {link.name}
                                                 <ArrowUpRight size={14} className="ml-2 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                                             </Link>
@@ -133,15 +133,15 @@ export default function Footer() {
 
                         <div className="col-span-2 md:col-span-1 space-y-6 md:space-y-8">
                             <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Availability</h4>
-                            <div className="p-5 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] space-y-3 md:space-y-4 text-left">
+                            <div className="p-5 md:p-6 rounded-2xl bg-black/[0.02] border border-black/[0.05] space-y-3 md:space-y-4 text-left">
                                 <div className="flex items-center space-x-3">
                                     <span className="relative flex h-2 w-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ec4899] opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ec4899]"></span>
                                     </span>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">Accepting Projects</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/60">Accepting Projects</span>
                                 </div>
-                                <p className="text-[10px] md:text-xs text-white/30 leading-relaxed md:block">
+                                <p className="text-[10px] md:text-xs text-foreground/40 leading-relaxed md:block">
                                     Currently onboarding new clients for the upcoming quarter. Limited availability remaining.
                                 </p>
                             </div>
@@ -150,14 +150,14 @@ export default function Footer() {
                 </motion.div>
 
                 {/* Bottom Bar: Ethics & Identity */}
-                <div className="pt-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
+                <div className="pt-12 border-t border-black/[0.05] flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                     <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 text-center md:text-left">
-                        <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
-                            © {currentYear} ASCENDIA DIGITAL <span className="hidden md:inline mx-4 text-white/5">/</span> <br className="md:hidden" /> ALL RIGHTS RESERVED
+                        <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/20">
+                            © {currentYear} ASCENDIA DIGITAL <span className="hidden md:inline mx-4 text-foreground/5">/</span> <br className="md:hidden" /> ALL RIGHTS RESERVED
                         </p>
                         <div className="flex space-x-6 md:space-x-10">
-                            <Link href="/privacy" className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 hover:text-white transition-colors">Privacy Ethics</Link>
-                            <Link href="/terms" className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 hover:text-white transition-colors">Terms of Reach</Link>
+                            <Link href="/privacy" className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-foreground transition-colors">Privacy Ethics</Link>
+                            <Link href="/terms" className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 hover:text-foreground transition-colors">Terms of Reach</Link>
                         </div>
                     </div>
 

@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Search, PenTool, Rocket, ArrowRight } from "lucide-react";
+import TextReveal from "./animations/TextReveal";
 
 const steps = [
     {
@@ -33,21 +34,21 @@ const steps = [
 
 export default function Process() {
     return (
-        <section id="process" className="relative min-h-screen flex items-center bg-black overflow-hidden py-24 md:py-0">
-            <div className="section-container relative z-10 pt-16 md:pt-32">
+        <section id="process" className="relative min-h-screen flex items-center bg-[#050505] overflow-hidden py-24 md:py-32 border-t border-white/5">
+            <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-left mb-16 md:mb-24"
+                    className="text-left mb-16 md:mb-24 flex flex-col items-start"
                 >
-                    <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-accent mb-6">Strategic Workflow</h2>
-                    <h3 className="text-3xl md:text-7xl font-bold tracking-tighter leading-[1.1]">
-                        The <span className="text-gradient italic font-serif">Ascendia</span> Method
+                    <h2 className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.5em] text-accent mb-6">Strategic Workflow</h2>
+                    <h3 className="text-4xl md:text-7xl font-serif font-normal tracking-tight leading-[1.05] text-foreground">
+                        The <span className="italic font-light opacity-80">Ascendia</span> Method.
                     </h3>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {steps.map((step, i) => (
                         <motion.div
                             key={step.id}
@@ -57,56 +58,49 @@ export default function Process() {
                             transition={{ duration: 0.8, delay: i * 0.2 }}
                             className="group relative"
                         >
-                            <div className="relative aspect-[4/5] rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-white/[0.05] bg-[#0A0A0A]">
+                            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/5 bg-[#0a0a0a] group-hover:border-accent/40 transition-all duration-700">
                                 {/* Background Image */}
                                 <img
                                     src={step.image}
                                     alt={step.title}
-                                    className="absolute inset-0 w-full h-full object-cover opacity-10 md:opacity-20 grayscale group-hover:opacity-40 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                                    className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale group-hover:opacity-40 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1.5s]"
                                 />
 
-                                {/* Gradient Overlays */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                                {/* Dark Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+                                <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-                                <div className="absolute inset-0 p-8 md:p-10 flex flex-col items-start justify-end text-left">
-                                    <div className="absolute top-8 md:top-10 left-8 md:top-10 right-8 md:top-10 flex justify-between items-start pointer-events-none w-full">
-                                        <span className="text-4xl md:text-5xl font-bold text-white/5 group-hover:text-accent/20 transition-colors duration-700 italic font-serif">
+                                <div className="absolute inset-0 p-8 flex flex-col items-start justify-end text-left">
+                                    <div className="absolute top-8 left-8 right-8 flex justify-between items-start pointer-events-none w-full">
+                                        <span className="text-4xl md:text-5xl font-serif font-light text-foreground/20 group-hover:text-accent transition-colors duration-700 italic">
                                             {step.id}
                                         </span>
-                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent/40 group-hover:bg-accent/10 transition-all duration-700 mr-16 md:mr-20">
-                                            <step.icon size={20} className="text-white/20 group-hover:text-accent transition-colors duration-700" />
+                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent/40 group-hover:bg-accent/10 transition-all duration-700 mr-16 md:mr-16 bg-white/5">
+                                            <step.icon size={20} className="text-foreground/30 group-hover:text-accent transition-colors duration-700" />
                                         </div>
                                     </div>
 
-                                    <div className="w-full">
-                                        <h4 className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent mb-3 md:mb-4 opacity-70 group-hover:opacity-100 transition-opacity duration-700">
+                                    <div className="w-full relative z-10">
+                                        <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-accent/80 mb-3 group-hover:text-accent transition-colors duration-700">
                                             {step.subtitle}
                                         </h4>
-                                        <h5 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 tracking-tighter">
+                                        <h5 className="text-3xl md:text-4xl font-serif font-normal mb-4 text-foreground tracking-tight">
                                             {step.title}
                                         </h5>
-                                        <p className="text-sm md:text-base text-white/50 leading-relaxed font-light group-hover:text-white/90 transition-colors duration-700">
+                                        <p className="text-sm md:text-base text-foreground/50 leading-relaxed font-light group-hover:text-foreground/80 transition-colors duration-700 border-l border-white/10 pl-4 py-1">
                                             {step.desc}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Decorative element for next step (except last) */}
-                            {i < steps.length - 1 && (
-                                <div className="hidden lg:flex absolute top-1/2 -right-4 translate-x-full z-20 text-white/5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-1000 pointer-events-none">
-                                    <ArrowRight size={40} strokeWidth={1} />
-                                </div>
-                            )}
                         </motion.div>
                     ))}
                 </div>
             </div>
 
             {/* Background Text Decoration */}
-            <div className="absolute -bottom-20 -left-20 text-[10rem] md:text-[20rem] font-bold text-white/[0.02] select-none pointer-events-none uppercase tracking-tighter leading-none whitespace-nowrap">
-                Innovation
+            <div className="absolute top-1/2 -translate-y-1/2 -right-40 text-[10rem] md:text-[20rem] font-serif italic text-white/[0.01] select-none pointer-events-none whitespace-nowrap z-0">
+                Methodology
             </div>
         </section>
     );

@@ -82,9 +82,9 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-24 md:py-40 relative bg-black overflow-hidden">
+        <section id="contact" className="py-24 md:py-40 relative bg-[#050505] overflow-hidden border-t border-white/5">
             {/* Background Narrative Glow */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(100,116,255,0.08),transparent_70%)]" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(198,168,124,0.05),transparent_70%)]" />
 
             <div className="section-container relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 items-start">
@@ -165,11 +165,11 @@ export default function Contact() {
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         className="text-center py-20"
                                     >
-                                        <div className="w-24 h-24 mx-auto rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center mb-10 shadow-[0_0_50px_rgba(100,116,255,0.2)]">
+                                        <div className="w-24 h-24 mx-auto rounded-full bg-accent/5 border border-accent/20 flex items-center justify-center mb-10 shadow-[0_0_50px_rgba(198,168,124,0.1)]">
                                             <CheckCircle className="text-accent" size={40} />
                                         </div>
-                                        <h3 className="text-5xl font-bold tracking-tighter mb-6">Success Artifact Received.</h3>
-                                        <p className="text-white/40 text-xl font-light max-w-md mx-auto leading-relaxed">
+                                        <h3 className="text-5xl font-serif font-normal tracking-tight mb-6 text-foreground">Success Artifact Received.</h3>
+                                        <p className="text-foreground/50 text-xl font-serif italic max-w-md mx-auto leading-relaxed">
                                             Your inquiry has reached the Echelon. Our visionaries will contact you within 24 hours.
                                         </p>
                                         <button
@@ -182,8 +182,8 @@ export default function Contact() {
                                 ) : (
                                     <motion.div key="form" className="space-y-16">
                                         <motion.div variants={itemVariants}>
-                                            <h3 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Start your <span className="text-gradient italic font-serif">Ascension.</span></h3>
-                                            <p className="text-white/30 text-lg font-light max-w-xl">
+                                            <h3 className="text-5xl md:text-6xl font-serif font-normal tracking-tight mb-6 text-foreground">Start your <span className="text-accent italic">Ascension.</span></h3>
+                                            <p className="text-foreground/50 text-lg font-serif italic max-w-xl">
                                                 Select your project tier below and share the core vision of your digital artifact.
                                             </p>
                                         </motion.div>
@@ -198,9 +198,9 @@ export default function Contact() {
                                                             key={t}
                                                             type="button"
                                                             onClick={() => setTier(t)}
-                                                            className={`px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest border transition-all duration-500 ${tier === t
-                                                                ? "bg-accent border-accent text-white shadow-[0_0_30px_rgba(100,116,255,0.4)]"
-                                                                : "bg-white/[0.02] border-white/5 text-white/40 hover:border-white/20"
+                                                            className={`px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] border transition-all duration-500 ${tier === t
+                                                                ? "bg-accent border-accent text-[#050505] shadow-[0_0_30px_rgba(198,168,124,0.2)]"
+                                                                : "bg-[#0a0a0a] border-white/5 text-foreground/40 hover:border-white/20 hover:text-accent"
                                                                 }`}
                                                         >
                                                             {t}
@@ -282,7 +282,7 @@ export default function Contact() {
                                                     <button
                                                         type="submit"
                                                         disabled={isLoading}
-                                                        className="group bg-accent text-white px-16 py-7 rounded-full text-xs font-bold uppercase tracking-[0.3em] flex items-center space-x-4 hover:bg-white hover:text-black transition-all duration-700 shadow-[0_0_50px_rgba(100,116,255,0.3)] disabled:opacity-50"
+                                                        className="group bg-accent text-[#050505] px-16 py-7 rounded-full text-xs font-bold uppercase tracking-[0.3em] flex items-center space-x-4 hover:bg-white hover:text-[#050505] transition-all duration-700 shadow-[0_0_30px_rgba(198,168,124,0.15)] disabled:opacity-50"
                                                     >
                                                         {isLoading ? (
                                                             <>
