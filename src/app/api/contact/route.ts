@@ -1,9 +1,16 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy");
+    if (!process.env.RESEND_API_KEY) {
+      console.warn("RESEND_API_KEY is missing. Skipping email.");
+      return NextResponse.json({ success: true, note: "API key missing" });
+    }
+    
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { name, email, company, phone, tier, message } = await req.json();
 
     if (!name || !email || !message) {
