@@ -15,6 +15,19 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
+
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-pan: pan 40s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes pan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
 }
 
 :root {

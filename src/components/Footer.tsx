@@ -1,16 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Instagram, Globe, ArrowUpRight } from "lucide-react";
 import Magnetic from "./animations/Magnetic";
 import { useChat } from "@/context/ChatContext";
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-
     const { openChat } = useChat();
+    const footerRef = useRef<HTMLElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: footerRef,
+        offset: ["start end", "end end"]
+    });
+
+    const y = useTransform(scrollYProgress, [0, 1], [250, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
     const containerVariants = {
         hidden: { opacity: 0, y: 30 },
@@ -26,11 +34,15 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-background pt-24 md:pt-40 pb-12 overflow-hidden border-t border-black/5">
-            {/* Cinematic Watermark Text */}
-            <div className="absolute -bottom-10 md:-bottom-20 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap text-foreground">
-                <h2 className="text-[30vw] md:text-[25vw] font-bold tracking-tighter leading-none">ASCENDIA</h2>
-            </div>
+        <footer ref={footerRef} className="relative bg-[#050505] overflow-hidden border-t border-white/5">
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse_at_top,rgba(198,168,124,0.08),transparent_70%)] pointer-events-none z-0" />
+            
+            <motion.div style={{ y, opacity }} className="relative z-10 pt-24 md:pt-40 pb-12 w-full">
+                {/* Cinematic Watermark Text */}
+                <div className="absolute -bottom-10 md:-bottom-20 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap text-foreground z-0">
+                    <h2 className="text-[30vw] md:text-[25vw] font-bold tracking-tighter leading-none">ASCENDIA</h2>
+                </div>
 
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
@@ -167,6 +179,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+            </motion.div>
         </footer>
     );
 }

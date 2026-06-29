@@ -36,7 +36,7 @@ export default function Services({ hideHeader = false }: ServicesProps) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
-        <section id="services" className="relative py-24 md:py-32 bg-[#050505] overflow-hidden border-t border-white/5">
+        <section id="services" className={`relative bg-[#050505] overflow-hidden ${hideHeader ? 'pb-24 md:pb-32 pt-8 md:pt-0' : 'py-24 md:py-32 border-t border-white/5'}`}>
             <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                 {!hideHeader && (
                     <motion.div

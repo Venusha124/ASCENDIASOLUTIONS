@@ -30,7 +30,7 @@ export default function Navigation() {
         <>
             {/* Top Marquee */}
             <div className="w-full bg-[#C6A87C] py-2 overflow-hidden flex items-center relative z-[60]">
-                <div className="whitespace-nowrap flex items-center animate-[marquee_20s_linear_infinite]">
+                <div className="whitespace-nowrap flex items-center animate-marquee w-max">
                     {[...Array(6)].map((_, i) => (
                         <div key={i} className="flex items-center text-[#050505] text-[9px] font-bold uppercase tracking-[0.4em] mx-4">
                             <span>Benchmark of Excellence</span>

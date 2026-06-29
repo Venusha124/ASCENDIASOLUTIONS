@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants, useMotionValue, useTransform } from "framer-motion";
+import { motion, Variants, useMotionValue, useTransform, useScroll } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import TextReveal from "./animations/TextReveal";
@@ -10,10 +10,14 @@ export default function Hero() {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
+    const { scrollY } = useScroll();
+    const yScroll = useTransform(scrollY, [0, 500], [0, 150]);
+    const opacityScroll = useTransform(scrollY, [0, 400], [1, 0]);
+
     const handleMouseMove = (e: React.MouseEvent) => {
         const { clientX, clientY } = e;
-        const moveX = (clientX - window.innerWidth / 2) / 25;
-        const moveY = (clientY - window.innerHeight / 2) / 25;
+        const moveX = (clientX - window.innerWidth / 2) / 20;
+        const moveY = (clientY - window.innerHeight / 2) / 20;
         mouseX.set(moveX);
         mouseY.set(moveY);
     };
@@ -46,25 +50,67 @@ export default function Hero() {
             onMouseMove={handleMouseMove}
             className="relative h-screen flex flex-col justify-center overflow-hidden bg-[#000]"
         >
-            {/* Dark Moody Background */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542273917363-3b1817f69a5d?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-40 scale-105" />
+            {/* Dark Moody Background with Grid */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542273917363-3b1817f69a5d?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-30 scale-105" />
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYwIDBMMCAwaDB2NjBoNjBWMHoiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPPHBhdGggZD0iTTAgMEg2MFY2MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDAuNWg2MCIgc3Ryb2tlPSIjQzZBODdDIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPjxwYXRoIGQ9Ik0wLjUgMHY2MCIgc3Ryb2tlPSIjQzZBODdDIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')] [background-size:40px_40px] animate-pan opacity-15" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
             </div>
 
+            {/* Ambient Animated Glows with Mouse Parallax */}
+            <motion.div 
+                style={{ x: mouseX, y: mouseY }}
+                animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(198,168,124,0.08),transparent_60%)] pointer-events-none z-0"
+            />
+            <motion.div 
+                style={{ x: mouseX, y: mouseY }}
+                animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                className="absolute bottom-0 left-[-20%] w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_center,rgba(198,168,124,0.05),transparent_60%)] pointer-events-none z-0"
+            />
+
             <div className="section-container relative z-10 flex flex-col items-center justify-center text-center mt-20">
                 <motion.div
+                    style={{ y: yScroll, opacity: opacityScroll }}
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="w-full flex flex-col items-center"
+                    className="w-full flex flex-col items-center relative"
                 >
-                    {/* Top Subtitle with Lines */}
+                    {/* Floating Tech Badge */}
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 1, duration: 1 }}
+                        className="absolute -top-20 right-0 hidden lg:flex items-center space-x-3 border border-white/5 bg-white/[0.01] px-5 py-2.5 rounded-full backdrop-blur-md"
+                    >
+                        <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"></span>
+                        </span>
+                        <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-white/30">System Online</span>
+                    </motion.div>
+
+                    {/* Top Subtitle with Animated Lines */}
                     <div className="flex items-center space-x-6 mb-8 md:mb-12">
-                        <div className="w-12 md:w-24 h-[1px] bg-accent/30" />
+                        <div className="w-12 md:w-24 h-[1px] bg-accent/20 relative overflow-hidden">
+                            <motion.div 
+                                className="w-full h-full bg-accent absolute top-0"
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                            />
+                        </div>
                         <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-accent">Direct from Ascendia</span>
-                        <div className="w-12 md:w-24 h-[1px] bg-accent/30" />
+                        <div className="w-12 md:w-24 h-[1px] bg-accent/20 relative overflow-hidden">
+                             <motion.div 
+                                className="w-full h-full bg-accent absolute top-0"
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ repeat: Infinity, duration: 2.2, ease: "linear", delay: 0.5 }}
+                            />
+                        </div>
                     </div>
 
                     {/* Massive Serif Headline */}

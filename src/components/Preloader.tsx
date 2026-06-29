@@ -13,28 +13,25 @@ export default function Preloader() {
         setIsLoading(true);
         setProgress(0);
         
-        // Handle scrolling while loading
         if (typeof window !== "undefined") {
             window.scrollTo(0, 0);
             document.body.style.overflow = "hidden";
         }
 
-        // Simulate progress loading
         let currentProgress = 0;
         const interval = setInterval(() => {
-            currentProgress += Math.floor(Math.random() * 10) + 5; // Random increments
+            currentProgress += Math.floor(Math.random() * 8) + 2; 
             if (currentProgress > 100) currentProgress = 100;
             setProgress(currentProgress);
 
             if (currentProgress === 100) {
                 clearInterval(interval);
-                // Wait slightly after reaching 100% to show completion
                 setTimeout(() => {
                     setIsLoading(false);
                     document.body.style.overflow = "auto";
-                }, 500);
+                }, 800);
             }
-        }, 80);
+        }, 60);
 
         return () => {
             clearInterval(interval);
@@ -47,43 +44,61 @@ export default function Preloader() {
             {isLoading && (
                 <motion.div
                     key="preloader"
-                    initial={{ y: 0 }}
-                    exit={{ y: "-100%" }}
-                    transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-                    className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050505] text-foreground"
+                    initial={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+                    exit={{ 
+                        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+                        transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
+                    }}
+                    className="fixed inset-0 z-[100] flex flex-col items-center justify-between bg-[#050505] text-foreground px-8 py-12 md:p-16 overflow-hidden"
                 >
                     {/* Background Subtle Accent */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vh] h-[50vh] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-[radial-gradient(circle_at_center,rgba(198,168,124,0.1),transparent_50%)] rounded-full pointer-events-none blur-3xl z-0" />
 
-                    <div className="relative z-10 flex flex-col items-center justify-center space-y-12 w-full px-6">
-                        {/* Logo Text Reveal */}
-                        <div className="overflow-hidden">
-                            <motion.h1
-                                initial={{ y: "100%", opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
-                                className="text-4xl md:text-6xl font-serif font-normal tracking-[0.2em] uppercase text-foreground"
-                            >
-                                Ascendia
-                            </motion.h1>
-                        </div>
+                    {/* Top Info */}
+                    <div className="w-full flex justify-between items-start relative z-10 overflow-hidden">
+                        <motion.span 
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                            className="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-accent"
+                        >
+                            Loading Environment
+                        </motion.span>
+                        <motion.span 
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
+                            className="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] text-foreground/50"
+                        >
+                            Ascendia Digital
+                        </motion.span>
+                    </div>
 
-                        {/* Loading Progress Wrapper */}
-                        <div className="flex flex-col items-center w-full max-w-xs space-y-4">
-                            <div className="flex justify-between w-full text-[10px] font-bold uppercase tracking-[0.3em] text-accent/80">
-                                <span>Loading Experience</span>
-                                <span>{progress}%</span>
-                            </div>
-                            
-                            {/* Loading Bar */}
-                            <div className="w-full h-[1px] bg-white/10 relative overflow-hidden">
-                                <motion.div
-                                    className="absolute top-0 left-0 h-full bg-accent"
-                                    initial={{ width: "0%" }}
-                                    animate={{ width: `${progress}%` }}
-                                    transition={{ duration: 0.2, ease: "linear" }}
-                                />
-                            </div>
+                    {/* Massive Typography Counter */}
+                    <div className="relative z-10 w-full flex items-center justify-center flex-grow">
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1.1, y: -50 }}
+                            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                            className="flex items-baseline"
+                        >
+                            <h2 className="text-[25vw] md:text-[20vw] font-serif font-light leading-none tracking-tighter text-foreground tabular-nums">
+                                {progress}
+                            </h2>
+                            <span className="text-[8vw] md:text-[5vw] font-serif italic text-accent ml-2 md:ml-4 -translate-y-4 md:-translate-y-10">%</span>
+                        </motion.div>
+                    </div>
+
+                    {/* Bottom Loader Line */}
+                    <div className="w-full relative z-10 flex flex-col items-center">
+                         <div className="w-full h-[1px] bg-white/5 relative overflow-hidden">
+                            <motion.div
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-accent/50 to-accent"
+                                initial={{ width: "0%" }}
+                                animate={{ width: `${progress}%` }}
+                                transition={{ duration: 0.1, ease: "linear" }}
+                            />
                         </div>
                     </div>
                 </motion.div>
