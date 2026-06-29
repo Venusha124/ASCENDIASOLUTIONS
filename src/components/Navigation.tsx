@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "./animations/Magnetic";
-import { useChat } from "@/context/ChatContext";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -16,7 +15,6 @@ const navLinks = [
 ];
 
 export default function Navigation() {
-    const { openChat } = useChat();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -75,16 +73,6 @@ export default function Navigation() {
                         ))}
                     </div>
 
-                    {/* Action Button */}
-                    <div className="hidden lg:flex">
-                        <button
-                            onClick={openChat}
-                            className="text-[10px] font-bold uppercase tracking-[0.3em] text-background bg-accent px-6 py-3 hover:bg-white transition-colors duration-300"
-                        >
-                            Let&apos;s Talk
-                        </button>
-                    </div>
-
                     {/* Mobile Menu Button */}
                     <button
                         className="lg:hidden flex items-center text-foreground hover:text-accent transition-colors"
@@ -97,50 +85,51 @@ export default function Navigation() {
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
+                {/* Mobile Menu Fullscreen Overlay */}
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: "-100%" }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="absolute top-full left-0 w-full bg-[#050505] border-b border-white/5 lg:hidden overflow-hidden"
+                            exit={{ opacity: 0, y: "-100%" }}
+                            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                            className="fixed inset-0 w-full h-screen bg-[#050505] z-40 lg:hidden flex flex-col justify-center items-center overflow-hidden"
                         >
-                            <div className="flex flex-col items-center justify-center space-y-8 py-16 px-6">
-                                {navLinks.map((link, i) => (
-                                    <motion.div
-                                        key={link.name}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    >
-                                        <Link
-                                            href={link.href}
-                                            className="text-2xl font-serif text-foreground hover:text-accent transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            {link.name}
-                                        </Link>
-                                    </motion.div>
-                                ))}
+                            {/* Decorative Background */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.5 }}
-                                    className="pt-8"
-                                >
-                                    <button
-                                        onClick={() => {
-                                            setIsOpen(false);
-                                            openChat();
-                                        }}
-                                        className="text-[10px] font-bold uppercase tracking-[0.3em] text-background bg-accent px-8 py-4 hover:bg-white transition-colors duration-300"
-                                    >
-                                        Let&apos;s Talk
-                                    </button>
-                                </motion.div>
+                            <div className="relative z-10 flex flex-col items-center justify-center space-y-6 w-full">
+                                {navLinks.map((link, i) => (
+                                    <div key={link.name} className="overflow-hidden">
+                                        <motion.div
+                                            initial={{ y: "100%" }}
+                                            animate={{ y: 0 }}
+                                            exit={{ y: "100%" }}
+                                            transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+                                        >
+                                            <Link
+                                                href={link.href}
+                                                className="text-5xl sm:text-6xl font-serif font-normal text-foreground hover:text-accent transition-colors hover:italic"
+                                                onClick={() => setIsOpen(false)}
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        </motion.div>
+                                    </div>
+                                ))}
                             </div>
+                            
+                            {/* Mobile Footer Links */}
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ delay: 1, duration: 0.5 }}
+                                className="absolute bottom-12 w-full flex justify-center space-x-8 text-[9px] uppercase tracking-[0.3em] text-accent/60"
+                            >
+                                <a href="mailto:ascendiasolutions@proton.me">Email</a>
+                                <a href="https://www.instagram.com/ascendiasolutions" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>

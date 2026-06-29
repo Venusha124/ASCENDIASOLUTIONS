@@ -5,8 +5,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Providers } from "@/components/Providers";
-import Chatbot from "@/components/Chatbot";
 import PageTransition from "@/components/PageTransition";
+import Preloader from "@/components/Preloader";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -39,6 +39,7 @@ export default function RootLayout({
       >
         <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] grain-overlay" />
         <Providers>
+          <Preloader />
           <SmoothScroll>
             <Navigation />
             <main className="relative min-h-screen">
@@ -47,7 +48,6 @@ export default function RootLayout({
               </PageTransition>
             </main>
             <Footer />
-            <Chatbot />
           </SmoothScroll>
         </Providers>
       </body>
