@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Layers, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Layers, ArrowUpRight, X } from "lucide-react";
 import Magnetic from "./animations/Magnetic";
 
 const categories = ["All", "Strategy", "Web", "Identity"];
@@ -11,35 +11,14 @@ const categories = ["All", "Strategy", "Web", "Identity"];
 const projects = [
     {
         id: "01",
-        title: "Aura Skincare",
+        title: "Taprovia",
         category: "Web",
-        client: "Aura Cosmetics",
+        client: "Sovereign Collection",
         year: "2026",
-        image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: "02",
-        title: "Lumina Wealth",
-        category: "Identity",
-        client: "Lumina Partners",
-        year: "2025",
-        image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: "03",
-        title: "Nexus Automotive",
-        category: "Strategy",
-        client: "Nexus EV",
-        year: "2026",
-        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=2069&auto=format&fit=crop"
-    },
-    {
-        id: "04",
-        title: "Vanguard Estate",
-        category: "Web",
-        client: "Vanguard Group",
-        year: "2025",
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09be1546?q=80&w=2070&auto=format&fit=crop"
+        imageWeb: "/taprovia-web.png",
+        imageMobile: "/taprovia-mobile.png", 
+        description: "An exclusive, digital flagship experience for Sovereign Collection's rare Ceylon spices. Featuring cinematic storytelling, immersive scroll-triggered interactions, and elite e-commerce performance tailored for a global luxury audience.",
+        link: "https://cinnamon-spices-taprovia.vercel.app/"
     }
 ];
 
@@ -50,6 +29,7 @@ interface ProjectsProps {
 export default function Projects({ hideHeader = false }: ProjectsProps) {
     const [activeCategory, setActiveCategory] = useState("All");
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+    const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
     // Mouse tracking for floating image
     const mouseX = useMotionValue(0);
@@ -69,32 +49,155 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
+    // Prevent scrolling when modal is open
+    useEffect(() => {
+        if (selectedProject) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [selectedProject]);
+
     const filteredProjects = useMemo(() => {
         if (activeCategory === "All") return projects;
         return projects.filter(p => p.category === activeCategory);
     }, [activeCategory]);
 
-    const activeImage = hoveredProject ? projects.find(p => p.id === hoveredProject)?.image : null;
+    const activeProjectData = hoveredProject ? projects.find(p => p.id === hoveredProject) : null;
+    const selectedProjectData = selectedProject ? projects.find(p => p.id === selectedProject) : null;
 
     return (
         <section id="projects" className="relative min-h-screen bg-[#050505] overflow-hidden py-24 border-t border-white/5">
             
+            {/* Project Modal */}
+            <AnimatePresence>
+                {selectedProjectData && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 bg-[#050505]/90 backdrop-blur-2xl"
+                    >
+                        {/* Close Overlay Area */}
+                        <div className="absolute inset-0 z-0 cursor-pointer" onClick={() => setSelectedProject(null)} />
+                        
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative z-10 w-full max-w-7xl max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col lg:flex-row"
+                        >
+                            <button 
+                                onClick={() => setSelectedProject(null)}
+                                className="absolute top-6 right-6 md:top-10 md:right-10 z-50 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground/50 hover:text-white hover:bg-white/10 transition-colors backdrop-blur-md"
+                            >
+                                <X size={24} />
+                            </button>
+
+                            {/* Left Side: Mockups */}
+                            <div className="w-full lg:w-3/5 bg-[#080808] p-8 md:p-16 relative flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(198,168,124,0.08),transparent_70%)] pointer-events-none" />
+                                
+                                <div className="relative w-full max-w-2xl flex items-end justify-center pt-10">
+                                    {/* Web View */}
+                                    <div className="w-[85%] aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-[#0a0a0a] flex flex-col p-2 relative z-0">
+                                        <div className="w-full h-4 border-b border-white/10 mb-2 flex items-center space-x-1.5 px-2">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                                        </div>
+                                        <img src={selectedProjectData.imageWeb} alt="Web View" className="w-full h-full object-cover rounded-md object-top" />
+                                    </div>
+
+                                    {/* Mobile View */}
+                                    <div className="w-[25%] aspect-[9/19] rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border-[6px] border-[#111] bg-[#050505] absolute right-4 md:right-8 -bottom-8 md:-bottom-12 z-10 shrink-0">
+                                        <div className="absolute top-0 inset-x-0 h-5 bg-[#111] z-20 flex justify-center rounded-b-2xl w-[45%] mx-auto" /> {/* Fake Notch */}
+                                        <img src={selectedProjectData.imageMobile} alt="Mobile View" className="w-full h-full object-cover object-top" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Side: Details */}
+                            <div className="w-full lg:w-2/5 p-8 md:p-16 flex flex-col justify-between overflow-y-auto max-h-[50vh] lg:max-h-none">
+                                <div>
+                                    <div className="flex items-center space-x-4 mb-8">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5">
+                                            {selectedProjectData.category}
+                                        </span>
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30">
+                                            {selectedProjectData.year}
+                                        </span>
+                                    </div>
+                                    
+                                    <h3 className="text-4xl md:text-6xl font-serif font-normal text-foreground mb-6 leading-none">
+                                        {selectedProjectData.title}
+                                    </h3>
+                                    
+                                    <div className="w-12 h-[1px] bg-accent/50 mb-8" />
+                                    
+                                    <div className="mb-10">
+                                        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/40 mb-2">Client</p>
+                                        <p className="text-lg text-foreground/80 font-serif italic">{selectedProjectData.client}</p>
+                                    </div>
+
+                                    <p className="text-foreground/60 text-sm md:text-base leading-relaxed font-light mb-12">
+                                        {selectedProjectData.description}
+                                    </p>
+                                </div>
+
+                                <a 
+                                    href={selectedProjectData.link} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    className="group flex items-center justify-between w-full p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-accent/10 hover:border-accent/30 transition-all duration-300"
+                                >
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/40 group-hover:text-accent/70 transition-colors">Experience The</span>
+                                        <span className="text-xl font-serif text-foreground group-hover:text-accent transition-colors">Live Digital Artifact</span>
+                                    </div>
+                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-[#050505] transition-all duration-300">
+                                        <ArrowUpRight size={20} className="group-hover:scale-110 transition-transform" />
+                                    </div>
+                                </a>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Floating Cursor Image Reveal (Desktop Only) */}
             <motion.div 
                 style={{ x: springX, y: springY }}
                 className="fixed top-0 left-0 pointer-events-none z-[100] hidden lg:block"
             >
                 <AnimatePresence>
-                    {activeImage && (
+                    {activeProjectData && !selectedProject && (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                             animate={{ opacity: 1, scale: 1, rotate: 0 }}
                             exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
-                            className="absolute -top-[200px] -left-[150px] w-[300px] h-[400px] rounded-2xl overflow-hidden shadow-2xl"
+                            className="absolute -top-[250px] -left-[200px] flex items-end"
                         >
-                            <img src={activeImage} alt="Project Preview" className="w-full h-full object-cover grayscale-[20%]" />
-                            <div className="absolute inset-0 bg-accent/20 mix-blend-overlay" />
+                            {/* Web View Mockup */}
+                            <div className="w-[450px] aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-[#0a0a0a] flex flex-col p-2">
+                                <div className="w-full h-4 border-b border-white/10 mb-2 flex items-center space-x-1.5 px-1">
+                                    <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                                    <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                                    <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                                </div>
+                                <img src={activeProjectData.imageWeb} alt="Web View" className="w-full h-full object-cover rounded-md object-top" />
+                            </div>
+
+                            {/* Mobile Interface Mockup (Overlapping) */}
+                            <div className="w-[120px] h-[240px] rounded-[1.5rem] overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.8)] border-[4px] border-white/10 bg-[#050505] -ml-16 mb-[-20px] relative z-10 shrink-0">
+                                <div className="absolute top-0 inset-x-0 h-4 bg-[#050505] z-20 flex justify-center rounded-b-xl w-[40px] mx-auto" /> {/* Fake Notch */}
+                                <img src={activeProjectData.imageMobile} alt="Mobile View" className="w-full h-full object-cover object-top" />
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -152,6 +255,7 @@ export default function Projects({ hideHeader = false }: ProjectsProps) {
                                     transition={{ duration: 0.6, delay: idx * 0.1 }}
                                     onMouseEnter={() => setHoveredProject(project.id)}
                                     onMouseLeave={() => setHoveredProject(null)}
+                                    onClick={() => setSelectedProject(project.id)}
                                     className="group relative border-b border-white/10 py-10 md:py-16 px-4 md:px-8 cursor-pointer overflow-hidden flex flex-col md:flex-row md:items-center justify-between"
                                 >
                                     {/* Hover Background */}
